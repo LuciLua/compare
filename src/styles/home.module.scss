@@ -1,0 +1,13 @@
+.container {
+  background-color: rgb(53, 53, 89);
+  color: #fff;
+  
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+
+  position: relative;
+
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
