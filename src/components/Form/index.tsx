@@ -33,11 +33,10 @@ function Form() {
             </div>
             <div className={styles.btnGroup}>
                 <h1>Pages</h1>
-                <button onClick={() => setPage(1)}>1</button>
-                <button onClick={() => setPage(2)}>2</button>
-                <button onClick={() => setPage(3)}>3</button>
-                <button onClick={() => setPage(4)}>4</button>
-                <button className={styles.pageActive}>{page}</button>
+                <div className={styles.inputs}>
+                    <input defaultValue={1} onInputCapture={(e: any) => setPage(e.target.value)} />
+                    <button className={styles.pageActive}>{page}</button>
+                </div>
             </div>
             <div className={styles.types}>
                 <label htmlFor="followers">followers
@@ -63,7 +62,7 @@ function Form() {
                     {type}
                 </label>
             </div>
-            <Table linkFinal={linkFinal} followers={followers} following={following} impostor={impostor} getImpostor={getImpostor}/>
+            <Table linkFinal={linkFinal} followers={followers} following={following} impostor={impostor} getImpostor={getImpostor} />
         </div>
     )
 }
