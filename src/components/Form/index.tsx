@@ -8,10 +8,10 @@ function Form() {
         user,
         novoUsuario,
         filter,
-        setPage,
+        // setPage,
         setType,
         type,
-        page,
+        // page,
         linkFinal,
         impostor,
         followers,
@@ -33,10 +33,10 @@ function Form() {
             </div>
             <div className={styles.btnGroup}>
                 <h1>Pages</h1>
-                <div className={styles.inputs}>
+                {/* <div className={styles.inputs}>
                     <input defaultValue={1} onInputCapture={(e: any) => setPage(e.target.value)} />
                     <button className={styles.pageActive}>{page}</button>
-                </div>
+                </div> */}
             </div>
             <div className={styles.types}>
                 <label htmlFor="followers">followers
