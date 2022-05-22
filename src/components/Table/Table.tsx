@@ -1,11 +1,11 @@
-import { ReactChild, ReactFragment, ReactPortal } from 'react'
-import useUser from '../../hooks/useUser'
 import styles from './table.module.scss'
 
 interface PropsTable {
     linkFinal: any,
     getImpostor: any,
+    getIamImpostor: any,
     impostor: any,
+    iamImpostor: any,
     followers: any,
     following: any
 }
@@ -21,8 +21,15 @@ function Table(props: PropsTable) {
             <button onClick={props.getImpostor} className={styles.getImpostorBtn}>
                 get impostor
             </button>
+
+            <button onClick={props.getIamImpostor} className={styles.getImpostorBtn}>
+                get iamImpostor
+            </button>
+
             <div className={styles.impostor}>
                 <b>impostor(es): {props.impostor.length}</b>
+
+
                 <div className={styles.impostorList}>
                     {props.impostor.map((i: any) => {
                         return (
@@ -32,6 +39,20 @@ function Table(props: PropsTable) {
                         )
                     })}
                 </div>
+            </div>
+            <div className={styles.impostor}>
+                <b>I am impostor of: {props.impostor.length}</b>
+
+                <div className={styles.impostorList}>
+                    {props.iamImpostor.map((i: any) => {
+                        return (
+                            <a href={`https://github.com/${i}`}>
+                                <p key={i}>{i}</p>
+                            </a>
+                        )
+                    })}
+                </div>
+
             </div>
 
             <div className={styles.wrap}>

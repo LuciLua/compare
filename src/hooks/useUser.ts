@@ -3,29 +3,27 @@ import { useEffect, useState } from "react";
 
 export default function useUser() {
   const [user, setUser] = useState();
-
   const [page, setPage] = useState(1);
-
   const [type, setType] = useState("followers");
+
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
+  
+  const allFollowers = [];
+  const allFollowings = [];
+
   const [impostor, setImpostor] = useState([]);
-  // --
+  const [iamImpostor, setIamImpostor] = useState([]);
 
   const listFollowers = [];
   const listFollowing = [];
 
-  // const linkFinal = `https://api.github.com/users/${user}/${type}?page=${page}`;
-
   const linkFinal = (user: any, type: any, page: any) => {
-    // console.log(`https://api.github.com/users/${user}/${type}?page=${page}`)
     return `https://api.github.com/users/${user}/${type}?page=${page}`;
   };
 
   const linkTotalFollowers = `https://api.github.com/users/${user}`;
 
-  const allFollowers = [];
-  const allFollowings = [];
 
   function novoUsuario(e: any) {
     setUser(e.target.value);
@@ -56,10 +54,7 @@ export default function useUser() {
       setFollowing(listFollowing);
     }
 
-    // limpa impostores
     setImpostor([]);
-    console.log(listFollowers);
-    console.log(listFollowing);
   }
 
   async function paginator() {
@@ -79,10 +74,6 @@ export default function useUser() {
       }
     }
 
-    console.log("-------------------------");
-    console.log("Numero de requisicoes: ", reqs);
-    console.log("-------------------------");
-
     for (let i = 0; i < reqs; i++) {
       const linkFinalParam = linkFinal(user, type, i + 1);
       filter(linkFinalParam);
@@ -90,6 +81,7 @@ export default function useUser() {
   }
 
   function getImpostor() {
+
     function puxa(f: any) {
       impostor.find((i) => i === f.login) ? null : impostor.push(f.login);
     }
@@ -104,6 +96,21 @@ export default function useUser() {
     setImpostor(impostor);
     console.log(impostor);
   }
+
+  function getIamImpostor(){
+    function puxa(f: any) {
+      iamImpostor.find((i) => i === f.login) ? null : iamImpostor.push(f.login);
+    }
+
+      // nao sigo mas me segue
+    // para cada pessoa que me segue
+    followers.map((f) => {
+      // veja se essa pessoa se encontra na listas de quem eu sigo
+      // se não: coloque seu nome no array iamImpostor
+      following.find((fw) => fw.login === f.login) ? null : puxa(f);
+    });
+    setIamImpostor(iamImpostor);
+  }  
 
   return {
     user,
@@ -122,6 +129,8 @@ export default function useUser() {
     allFollowings,
     impostor,
     getImpostor,
+    getIamImpostor,
     paginator,
+    iamImpostor
   };
 }

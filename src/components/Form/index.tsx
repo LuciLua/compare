@@ -7,7 +7,6 @@ function Form() {
     const {
         user,
         novoUsuario,
-        filter,
         // setPage,
         setType,
         type,
@@ -16,8 +15,10 @@ function Form() {
         impostor,
         followers,
         following,
+        paginator,
         getImpostor,
-        paginator
+        getIamImpostor,
+        iamImpostor,
     } = useUser()
 
     return (
@@ -64,7 +65,7 @@ function Form() {
                     {type}
                 </label>
             </div>
-            <Table linkFinal={linkFinal} followers={followers} following={following} impostor={impostor} getImpostor={getImpostor} />
+            <Table linkFinal={linkFinal} followers={followers} following={following} impostor={impostor} getImpostor={getImpostor} getIamImpostor={getIamImpostor} iamImpostor={iamImpostor} />
         </div>
     )
 }
