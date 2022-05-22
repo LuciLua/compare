@@ -16,7 +16,8 @@ function Form() {
         impostor,
         followers,
         following,
-        getImpostor
+        getImpostor,
+        paginator
     } = useUser()
 
     return (
@@ -27,7 +28,8 @@ function Form() {
                     placeholder="Your Username"
                     onChange={novoUsuario}
                 />
-                <button onClick={filter}>
+                {/* <button onClick={filter}> */}
+                <button onClick={paginator}>
                     Filter {user ? `for ${user}` : ""}
                 </button>
             </div>

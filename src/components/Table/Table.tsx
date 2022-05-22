@@ -3,7 +3,7 @@ import useUser from '../../hooks/useUser'
 import styles from './table.module.scss'
 
 interface PropsTable {
-    linkFinal: string,
+    linkFinal: any,
     getImpostor: any,
     impostor: any,
     followers: any,

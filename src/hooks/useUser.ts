@@ -12,7 +12,16 @@ export default function useUser() {
   const [impostor, setImpostor] = useState([]);
   // --
 
-  const linkFinal = `https://api.github.com/users/${user}/${type}?page=${page}`;
+  const listFollowers = []
+  const listFollowing = []
+
+  // const linkFinal = `https://api.github.com/users/${user}/${type}?page=${page}`;
+
+  const linkFinal = (user: any, type: any, page: any) => {
+    // console.log(`https://api.github.com/users/${user}/${type}?page=${page}`)
+    return `https://api.github.com/users/${user}/${type}?page=${page}`;
+  };
+
   const linkTotalFollowers = `https://api.github.com/users/${user}`;
 
   const allFollowers = [];
@@ -27,23 +36,43 @@ export default function useUser() {
     console.log(page);
   }
 
-  async function totalFollowers() {
+  async function getTotalFollowers() {
     const resp = await axios.get(linkTotalFollowers);
     const data = await resp.data;
     const totalFollowersNumber = data.followers;
     return totalFollowersNumber;
   }
 
-  async function filter() {
-    const TOTAL_FOLLOWERS: any = totalFollowers();
+  async function filter(linkFinalParam: any) {
+    const resp = await axios.get(linkFinalParam);
+    const data = await resp.data;
+
+    if (type === "followers") {
+      listFollowers.push(...data);
+      setFollowers(listFollowers);
+      
+    }
+    if (type === "following") {
+      listFollowing.push(...data);
+      setFollowing(listFollowing);
+    }
+
+    // limpa impostores
+    setImpostor([]);
+    console.log(listFollowers)
+    console.log(listFollowing)
+  }
+
+  async function paginator() {
+    const TOTAL_FOLLOWERS: any = getTotalFollowers();
     const EACH_PAGE_FOLLOWERS = 30;
 
     // Logic
-    var div_int = await TOTAL_FOLLOWERS / EACH_PAGE_FOLLOWERS;
-    var div_rest = await TOTAL_FOLLOWERS % EACH_PAGE_FOLLOWERS;
+    var div_int = (await TOTAL_FOLLOWERS) / EACH_PAGE_FOLLOWERS;
+    var div_rest = (await TOTAL_FOLLOWERS) % EACH_PAGE_FOLLOWERS;
     var reqs = Math.floor(div_int);
 
-    if (await TOTAL_FOLLOWERS > 0 && await TOTAL_FOLLOWERS < 30) {
+    if ((await TOTAL_FOLLOWERS) > 0 && (await TOTAL_FOLLOWERS) < 30) {
       reqs = 1;
     } else {
       if (div_rest > 0) {
@@ -55,29 +84,10 @@ export default function useUser() {
     console.log("Numero de requisicoes: ", reqs);
     console.log("-------------------------");
 
-
-    for (let i = 0; i < reqs; i++ ){
-      console.log("req...", i+1)
-      let pags = i+1
-      setPage(pags)
-      console.log(page)
-      // console.log(linkFinal)
+    for (let i = 0; i < reqs; i++) {
+      const linkFinalParam = linkFinal(user, type, i + 1);
+      filter(linkFinalParam);
     }
-    
-
-
-    const resp = await axios.get(linkFinal);
-    const data = await resp.data;
-
-    if (type === "followers") {
-      setFollowers(await data);
-    }
-    if (type === "following") {
-      setFollowing(await data);
-    }
-
-    // limpa impostores
-    setImpostor([]);
   }
 
   function getImpostor() {
@@ -113,5 +123,6 @@ export default function useUser() {
     allFollowings,
     impostor,
     getImpostor,
+    paginator,
   };
 }
