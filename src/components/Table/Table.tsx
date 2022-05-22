@@ -25,7 +25,11 @@ function Table(props: PropsTable) {
                 <b>impostor(es): {props.impostor.length}</b>
                 <div className={styles.impostorList}>
                     {props.impostor.map((i: any) => {
-                        return <p key={i}>{i}</p>
+                        return (
+                            <a href={`https://github.com/${i}`}>
+                                <p key={i}>{i}</p>
+                            </a>
+                        )
                     })}
                 </div>
             </div>

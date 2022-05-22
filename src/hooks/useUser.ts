@@ -12,8 +12,8 @@ export default function useUser() {
   const [impostor, setImpostor] = useState([]);
   // --
 
-  const listFollowers = []
-  const listFollowing = []
+  const listFollowers = [];
+  const listFollowing = [];
 
   // const linkFinal = `https://api.github.com/users/${user}/${type}?page=${page}`;
 
@@ -50,7 +50,6 @@ export default function useUser() {
     if (type === "followers") {
       listFollowers.push(...data);
       setFollowers(listFollowers);
-      
     }
     if (type === "following") {
       listFollowing.push(...data);
@@ -59,8 +58,8 @@ export default function useUser() {
 
     // limpa impostores
     setImpostor([]);
-    console.log(listFollowers)
-    console.log(listFollowing)
+    console.log(listFollowers);
+    console.log(listFollowing);
   }
 
   async function paginator() {
