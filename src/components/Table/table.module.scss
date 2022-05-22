@@ -1,7 +1,7 @@
 .container {
   width: 100%;
 
-  .getImpostorBtn{
+  .getImpostorBtn {
     border: none;
     border-radius: 3px;
     height: 30px;
@@ -10,7 +10,7 @@
 
     cursor: pointer;
 
-    &:hover{
+    &:hover {
       background-color: rgb(220, 220, 220);
     }
   }
@@ -30,7 +30,7 @@
     display: flex;
     flex-direction: column;
 
-    &::-webkit-scrollbar{
+    &::-webkit-scrollbar {
       background-color: rgb(65, 65, 65);
       width: 5px;
     }
@@ -41,11 +41,10 @@
     }
 
     .impostorList {
-
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      a{
+      a {
         text-decoration: none;
         color: #fff;
         p {
