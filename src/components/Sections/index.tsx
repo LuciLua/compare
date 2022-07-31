@@ -18,7 +18,6 @@ function Section(props: PropsSection) {
                 {props.children}
             </main>
         </section>
-
     )
 }
 

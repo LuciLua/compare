@@ -1,6 +1,7 @@
 import useUser from "../../hooks/useUser"
 import Table from "../Table/Table"
 import styles from "./form.module.scss"
+import { AiOutlineSearch } from "react-icons/ai"
 
 function Form() {
 
@@ -19,27 +20,25 @@ function Form() {
         getImpostor,
         getIamImpostor,
         iamImpostor,
+        getMyPhoto,
+        userId
     } = useUser()
 
     return (
         <div className={styles.container}>
             <div className={styles.boxInput}>
-                <input
-                    type="text"
-                    placeholder="Your Username"
-                    onChange={novoUsuario}
-                />
-                {/* <button onClick={filter}> */}
-                <button onClick={paginator}>
-                    Filter {user ? `for ${user}` : ""}
-                </button>
-            </div>
-            <div className={styles.btnGroup}>
-                <h1>Pages</h1>
-                {/* <div className={styles.inputs}>
-                    <input defaultValue={1} onInputCapture={(e: any) => setPage(e.target.value)} />
-                    <button className={styles.pageActive}>{page}</button>
-                </div> */}
+                <div className={styles.inputAndButton}>
+                    <input
+                        type="text"
+                        placeholder="Your Username"
+                        onChange={novoUsuario}
+                    />
+                    <button onClick={paginator}>
+                        <AiOutlineSearch />
+                    </button>
+                </div>
+
+                <p>{user ? `Searching for ${user}` : ""}</p>
             </div>
             <div className={styles.types}>
                 <label htmlFor="followers">followers
@@ -51,7 +50,6 @@ function Form() {
                         onClick={() => setType("followers")}
                     />
                 </label>
-
                 <label htmlFor="following">following
                     <input
                         type="radio"
@@ -65,7 +63,16 @@ function Form() {
                     {type}
                 </label>
             </div>
-            <Table linkFinal={linkFinal} followers={followers} following={following} impostor={impostor} getImpostor={getImpostor} getIamImpostor={getIamImpostor} iamImpostor={iamImpostor} />
+            <Table
+                linkFinal={linkFinal}
+                followers={followers}
+                following={following}
+                impostor={impostor}
+                getImpostor={getImpostor}
+                getIamImpostor={getIamImpostor}
+                iamImpostor={iamImpostor}
+                getMyPhoto={getMyPhoto}
+                userId={userId} />
         </div>
     )
 }

@@ -3,10 +3,10 @@ import Menu from "../components/Menu"
 
 function App({ Component, pageProps }) {
     return (
-        <>
-            <Menu />
+        <main>
             <Component {...pageProps} />
-        </>
+            <Menu />
+        </main>
     )
 }
 

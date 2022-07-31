@@ -34,6 +34,17 @@ export default function useUser() {
     console.log(page);
   }
 
+  async function getMyPhoto() {
+    const resp = await axios.get(`https://api.github.com/users/${user}`);
+    const data = await resp.data;
+    const id = data.id;
+    console.log(id)
+    return id;
+  }
+
+
+  const userId = getMyPhoto
+
   async function getTotalFollowers() {
     const resp = await axios.get(linkTotalFollowers);
     const data = await resp.data;
@@ -131,6 +142,8 @@ export default function useUser() {
     getImpostor,
     getIamImpostor,
     paginator,
-    iamImpostor
+    iamImpostor,
+    getMyPhoto,
+    userId
   };
 }
