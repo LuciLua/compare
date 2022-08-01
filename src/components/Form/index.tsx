@@ -6,15 +6,15 @@ import { useState } from "react"
 import Image from "next/image"
 
 interface PropsForm {
-    linkFinal: any,
-    getImpostor: any,
-    getIamImpostor: any,
-    impostor: any,
-    iamImpostor: any,
-    followers: any,
-    following: any,
-    getMyPhoto: any,
-    userId: any
+    linkFinal?: any,
+    getImpostor?: any,
+    getIamImpostor?: any,
+    impostor?: any,
+    iamImpostor?: any,
+    followers?: any,
+    following?: any,
+    getMyPhoto?: any,
+    userId?: any
 }
 
 

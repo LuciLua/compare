@@ -12,7 +12,7 @@ function Home() {
                     </p>
                 </Section> */}
             <Section title="Get Impostor 🔎" id="compare">
-                <Form />
+                <Form  />
             </Section>
         </div>
     )
