@@ -1,9 +1,26 @@
 import useUser from "../../hooks/useUser"
 import Table from "../Table/Table"
 import styles from "./form.module.scss"
-import { AiOutlineSearch } from "react-icons/ai"
+import { AiFillCamera, AiOutlineSearch } from "react-icons/ai"
+import { useState } from "react"
+import Image from "next/image"
 
-function Form() {
+interface PropsForm {
+    linkFinal: any,
+    getImpostor: any,
+    getIamImpostor: any,
+    impostor: any,
+    iamImpostor: any,
+    followers: any,
+    following: any,
+    getMyPhoto: any,
+    userId: any
+}
+
+
+function Form(props:PropsForm) {
+
+    const [photo, setPhoto] = useState(`/gh.png`)
 
     const {
         user,
@@ -21,11 +38,29 @@ function Form() {
         getIamImpostor,
         iamImpostor,
         getMyPhoto,
-        userId
+        userId,
     } = useUser()
+
+    async function showPhoto() {
+        const userID = await userId()
+        setPhoto(`https://avatars.githubusercontent.com/u/${userID}`)
+    }
+
+    async function execPaginatorAndPhoto() {
+        await paginator()
+        await showPhoto()
+    }
+
+
 
     return (
         <div className={styles.container}>
+            <div className={styles.profilePhoto}>
+                <Image
+                    src={photo}
+                    layout='fill'
+                />
+            </div>
             <div className={styles.boxInput}>
                 <div className={styles.inputAndButton}>
                     <input
@@ -33,7 +68,7 @@ function Form() {
                         placeholder="Your Username"
                         onChange={novoUsuario}
                     />
-                    <button onClick={paginator}>
+                    <button onClick={execPaginatorAndPhoto}>
                         <AiOutlineSearch />
                     </button>
                 </div>

@@ -1,8 +1,6 @@
 import Link from 'next/link'
 import styles from './table.module.scss'
 import { AiFillGitlab, AiOutlineUser, AiFillCamera } from 'react-icons/ai'
-import Image from 'next/image'
-import { useState } from 'react'
 
 interface PropsTable {
     linkFinal: any,
@@ -17,31 +15,8 @@ interface PropsTable {
 }
 
 function Table(props: PropsTable) {
-
-    const [photo, setPhoto] = useState(`photo here`)
-
-
-    async function showPhoto(props) {
-        const userID = await props.userId()
-        setPhoto(`https://avatars.githubusercontent.com/u/${userID}`)
-    }
-
-
     return (
         <div className={styles.container}>
-
-            <button onClick={() => showPhoto(props)}>
-                <AiFillCamera />
-            </button>
-
-            <div className={styles.profilePhoto}>
-
-                <Image
-                    src={photo}
-                    layout='fill'
-                />
-            </div>
-
             <div className={styles.impostors}>
 
                 <div className={styles.btnCollection}>
