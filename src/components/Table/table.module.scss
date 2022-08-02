@@ -2,19 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  .btnPhoto {
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    padding: 10px;
-    width: fit-content;
-    cursor: pointer;
-    &:hover {
-      background-color: rgb(20, 22, 24);
-    }
-  }
+  background-color: var(--global-bg);
 
   .profilePhoto {
     position: fixed;
@@ -39,7 +27,7 @@
     margin: 10px 0;
 
     .btnCollection {
-      background-color: rgb(0, 0, 0);
+      background-color: var(--global-bg);
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -54,12 +42,12 @@
 
         cursor: pointer;
 
-        background-color: rgb(0, 0, 0);
+        background-color: var(--global-bg);
         border: 1px solid rgb(255, 255, 255);
         color: #fff;
 
         &:hover {
-          background-color: #000;
+          background-color: var(--global-bg);
           color: rgb(255, 0, 0);
           border: 1px solid rgb(255, 4, 4);
         }
@@ -67,7 +55,7 @@
     }
 
     .impostor {
-      background-color: rgba(22, 22, 22, 0.439);
+      background-color: rgba(0, 0, 0, 0.439);
 
       max-height: 300px;
       min-width: 300px;
@@ -83,8 +71,11 @@
       display: flex;
       flex-direction: column;
 
+    width: 100%;
+
+
       &::-webkit-scrollbar {
-        background-color: rgb(0, 0, 0);
+        background-color: var(--global-bg);
         width: 5px;
         border-radius: 10px;
       }
@@ -108,12 +99,12 @@
           color: #fff;
           width: 100%;
           height: fit-content;
-          background-color: rgb(22, 22, 22);
+          background-color: var(--global-bg);
           margin: 2px;
 
           &:hover {
             color: red;
-            background-color: #000;
+            background-color: var(--global-bg);
           }
         }
       }
@@ -151,7 +142,7 @@
           background-color: rgb(22, 22, 22);
 
           &:hover {
-            background-color: rgb(0, 0, 0);
+            background-color: var(--global-bg);
           }
         }
       }
@@ -172,6 +163,15 @@
         min-width: 100%;
         max-width: 100%;
         width: 100%;
+      }
+    }
+
+    .wrap{
+      .wrapFlex{
+        word-break: break-all;
+        .followers a, .following a{
+          word-break: break-all;
+        }
       }
     }
   }

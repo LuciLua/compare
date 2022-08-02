@@ -6,9 +6,8 @@
     font-family: 'Lexend', sans-serif;
 }
 
-html{
-    background-color: #000000;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400&display=swap');
 
+:root{
+    --global-bg: #14141e;
+}
