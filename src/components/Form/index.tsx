@@ -26,7 +26,7 @@ export default function Form() {
             </form>
             <div className={styles.user_info}>
                 <Suspense fallback={<p>⌛ loading github infos...</p>}>
-                    {userData.name == "" ?
+                    {userData.name ?
                         <ul>
                             <header>
                                 <div className={styles.c_img}>
