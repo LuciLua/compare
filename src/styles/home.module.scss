@@ -1,13 +1,13 @@
-.container {
-  background-color: var(--global-bg);
-  color: #fff;
-  
-  width: 100%;
-  min-height: 100vh;
-  height: 100vh;
+.wrap {
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    max-width: 1000px;
 
-  position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-  overflow-y: scroll;
-  scroll-behavior: smooth;
+    position: relative;
 }

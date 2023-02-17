@@ -1,85 +1,74 @@
-import Link from 'next/link'
+'use client'
+
 import styles from './table.module.scss'
-import { AiFillGitlab, AiOutlineUser, AiFillCamera } from 'react-icons/ai'
+import { useState, useContext } from "react"
+import { UserContext } from '../../contexts/userContext'
 
-interface PropsTable {
-    linkFinal: any,
-    getImpostor: any,
-    getIamImpostor: any,
-    impostor: any,
-    iamImpostor: any,
-    followers: any,
-    following: any,
-    getMyPhoto: any,
-    userId: any
-}
-
-function Table(props: PropsTable) {
+function Table(props) {
+    const { followers, followings, username } = useContext(UserContext)
     return (
-        <div className={styles.container}>
-            <div className={styles.impostors}>
-
-                <div className={styles.btnCollection}>
-                    <button onClick={props.getImpostor} className={styles.getImpostorBtn}>
-                        <AiFillGitlab />
-                    </button>
-                    <button onClick={props.getIamImpostor} className={styles.getImpostorBtn}>
-                        <AiOutlineUser />
-                    </button>
-                </div>
-                <div className={styles.impostor}>
-                    <b>impostor(es): {props.impostor.length}</b>
-                    <div className={styles.impostorList}>
-                        {props.impostor.map((i: any) => {
-                            return (
-                                <a key={i} href={`https://github.com/${i}`}>
-                                    {i}
-                                </a>
-                            )
-                        })}
+        <main className={styles.container}>
+            <button onClick={() => console.log(username)}>CLIQUE</button>
+            <div className={styles.c_table}>
+                <div className={styles.table}>
+                    <h1>😡 Follow back do not reciprocate</h1>
+                    <div className={styles.table_type}>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Profile</th>
+                                    <th>Bio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Luci Lua</td>
+                                    <td>Link</td>
+                                    <td>Bio here</td>
+                                </tr>
+                                <tr>
+                                    <td>Luci Lua</td>
+                                    <td>Link</td>
+                                    <td>Bio here</td>
+                                </tr>
+                                <tr>
+                                    <td>Luci Lua</td>
+                                    <td>Link</td>
+                                    <td>Bio here</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div className={styles.impostor}>
-                    <b>I am impostor of: {props.impostor.length}</b>
-                    <div className={styles.impostorList}>
-                        {props.iamImpostor.map((i: any) => {
-                            return (
-                                <a key={i} href={`https://github.com/${i}`}>
-                                    {i}
-                                </a>
-                            )
-                        })}
+                <div className={styles.table}>
+                    <h1>🚶 follow me and i don't follow yet</h1>
+                    <div className={styles.table_type}>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Profile</th>
+                                    <th>Bio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Luci Lua</td>
+                                    <td>Link</td>
+                                    <td>Bio here</td>
+                                </tr>
+                                <tr>
+                                    <td>Luci Lua</td>
+                                    <td>Link</td>
+                                    <td>Bio here</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div className={styles.wrap}>
-                <div className={styles.wrapFlex}>
-                    <h1>Followers: {props.followers.length}</h1>
-                    <div className={styles.followers}>
-                        {props.followers.map((fw: any) => {
-                            return (
-                                <Link href={`https://github.com/${fw.login}`} key={fw.id}>
-                                    <a>{fw.login}</a>
-                                </Link>
-                            )
-                        })}
-                    </div>
-
-                </div>
-                <div className={styles.wrapFlex}>
-                    <h1>Following: {props.following.length}</h1>
-                    <div className={styles.following}>
-                        {props.following.map((fw: any) => {
-                            return (
-                                <Link href={`https://github.com/${fw.login}`} key={fw.id}>
-                                    <a>{fw.login}</a>
-                                </Link>
-                            )
-                        })}
-                    </div>
-                </div>
-            </div>
-        </div>
+        </main>
     )
 }
 export default Table
