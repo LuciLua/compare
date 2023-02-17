@@ -10,15 +10,27 @@ export default function UserContextProvider({ children }) {
     const [followers, setFollowers] = useState([])
     const [followings, setFollowings] = useState([])
 
-    async function fetchUserProfileData() {
-        const response = await fetch(`https://api.github.com/users/${username}`, {
-            cache: 'no-store'
-        })
-        const data = await response.json()
-        setUserData(data)
 
-        fetchFollowers(data.followers || 1)
-        fetchFollowing(data.following || 1)
+    const allFollowers = []
+    const allFollowing = []
+
+    async function fetchUserProfileData() {
+        // const response = await fetch(`https://api.github.com/users/${username}`, {
+        //     cache: 'no-store'
+        // })
+        // const data = await response.json()
+        // setUserData(data)
+
+        // fetchFollowers(data.followers || 1)
+        // fetchFollowing(data.following || 1)
+        
+        
+        fetchFollowers(8)
+        fetchFollowing(8)
+
+        
+        console.log(allFollowers)
+        console.log(allFollowing)
     }
 
     async function fetchFollowers(numberOfFollowers: number) {
@@ -33,6 +45,7 @@ export default function UserContextProvider({ children }) {
     async function fetchFollowing(numberOfFollowings: number) {
 
         let page = numberOfFollowings / 30 + 1
+
         for (let i = 1; i < page; i++) {
             // runThisFunc(i)
             runFetchFollowingsForEachPage(i)
@@ -44,23 +57,31 @@ export default function UserContextProvider({ children }) {
     // }
 
     async function runFetchFollowersForEachPage(page: number) {
-        const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
-            cache: 'no-store'
-        })
-        const data = await response.json()
-        setFollowers(data)
+        // const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
+            // cache: 'no-store'
+        // })
+        // const data = await response.json()
+        // setFollowers(data)
         // setFollowers([...followers, data])
-        console.log(followers)
+        // console.log(followers)
+
+        const data = page + username
+
+        allFollowers.push(await data)
     }
 
     async function runFetchFollowingsForEachPage(page: number) {
-        const response = await fetch(`https://api.github.com/users/${username}/following?page=${page}`, {
-            cache: 'no-store'
-        })
-        const data = await response.json()
-        setFollowings(data)
+        // const response = await fetch(`https://api.github.com/users/${username}/following?page=${page}`, {
+            // cache: 'no-store'
+        // })
+        // const data = await response.json()
+        // setFollowings(data)
         // setFollowings([...followings, data])
-        console.log(followings)
+        // console.log(followings)
+
+        const data = page + 'bb'
+
+        allFollowing.push(await data)
     }
 
 
