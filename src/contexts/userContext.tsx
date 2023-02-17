@@ -32,8 +32,8 @@ export default function UserContextProvider({ children }) {
         console.log(allFollowers)
         console.log(allFollowing)
 
-        setFollowers(allFollowers)
-        setFollowings(allFollowing)
+        setFollowers([...allFollowers])
+        setFollowings([...allFollowing])
 
     }
 
