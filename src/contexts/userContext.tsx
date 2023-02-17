@@ -15,18 +15,14 @@ export default function UserContextProvider({ children }) {
     const allFollowing = []
 
     async function fetchUserProfileData() {
-        // const response = await fetch(`https://api.github.com/users/${username}`, {
-        //     cache: 'no-store'
-        // })
-        // const data = await response.json()
-        // setUserData(data)
+        const response = await fetch(`https://api.github.com/users/${username}`, {
+            cache: 'no-store'
+        })
+        const data = await response.json()
+        setUserData(data)
 
-        // fetchFollowers(data.followers || 1)
-        // fetchFollowing(data.following || 1)
-
-
-        await fetchFollowers(230)
-        await fetchFollowing(230)
+        fetchFollowers(data.followers || 1)
+        fetchFollowing(data.following || 1)
 
 
         console.log(allFollowers)
@@ -68,13 +64,7 @@ export default function UserContextProvider({ children }) {
             cache: 'no-store'
         })
         const data = await response.json()
-        // setFollowers(data)
-        // setFollowers([...followers, data])
-        // console.log(followers)
-
-        // let data = { name: page + ' - followers' }
-
-        allFollowers.push(await data)
+        allFollowers.push(...data)
     }
 
     async function runFetchFollowingsForEachPage(page: number) {
@@ -82,13 +72,7 @@ export default function UserContextProvider({ children }) {
             cache: 'no-store'
         })
         const data = await response.json()
-        // setFollowings(data)
-        // setFollowings([...followings, data])
-        // console.log(followings)
-
-        // let data = { name: page + ' - followings' }
-
-        allFollowing.push(await data)
+        allFollowing.push(...data)
     }
 
 

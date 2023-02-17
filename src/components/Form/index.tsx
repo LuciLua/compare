@@ -12,7 +12,7 @@ import { UserContext } from "../../contexts/userContext"
 
 export default function Form() {
 
-    const { setUsername, fetchUserProfileData, userData} = useContext(UserContext)
+    const { setUsername, fetchUserProfileData, userData } = useContext(UserContext)
 
     async function searchGitHubUser() {
         fetchUserProfileData()
@@ -26,7 +26,7 @@ export default function Form() {
             </form>
             <div className={styles.user_info}>
                 <Suspense fallback={<p>⌛ loading github infos...</p>}>
-                    {userData ?
+                    {userData.name == "" ?
                         <ul>
                             <header>
                                 <div className={styles.c_img}>
@@ -55,7 +55,9 @@ export default function Form() {
                                 Following: {userData.following}
                             </li>
                         </ul>
-                        : <p>
+                        : <p style={{
+                            color: '#fff'
+                        }}>
                             ⌛waiting for input...
                         </p>
                     }

@@ -5,6 +5,7 @@ import { useState, useContext } from "react"
 import { UserContext } from '../../contexts/userContext'
 import Link from 'next/link'
 import Image from 'next/image'
+import { DiGithubAlt } from "react-icons/di"
 
 function Table() {
 
@@ -33,11 +34,15 @@ function Table() {
                                                 <td>
                                                     <Link
                                                         href={`https://github.com/${follower.login}`}>
-                                                        GitHub
+                                                        <DiGithubAlt /> GitHub
                                                     </Link>
                                                 </td>
                                                 <td>
-                                                    <Image fill={true} alt='img_user' src={`${follower.avatar_url}` || '/default_user.png'} />
+                                                    <Image
+                                                        sizes='40'
+                                                        fill={true}
+                                                        alt='img_user'
+                                                        src={`${follower.avatar_url}` || '/default_user.png'} />
                                                 </td>
                                             </tr>
                                         )
@@ -51,7 +56,11 @@ function Table() {
                                             for input ...
                                         </td>
                                         <td>
-                                            <Image fill={true} alt='img_user' src={'/default_user.png'} />
+                                            <Image
+                                                sizes='40'
+                                                fill={true}
+                                                alt='img_user'
+                                                src={'/default_user.png'} />
                                         </td>
                                     </tr>
                                 }
@@ -79,11 +88,12 @@ function Table() {
                                                 <td>
                                                     <Link
                                                         href={`https://github.com/${following.login}`}>
-                                                        GitHub
+                                                        <DiGithubAlt /> GitHub
                                                     </Link>
                                                 </td>
                                                 <td>
                                                     <Image
+                                                        sizes='40'
                                                         fill={true}
                                                         alt='img_user'
                                                         src={`${following.avatar_url}` || '/default_user.png'} />
