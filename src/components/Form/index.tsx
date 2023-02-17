@@ -13,7 +13,7 @@ import { UserContext } from "../../contexts/userContext"
 export default function Form() {
     const [githubUser, setGithubUser] = useState<any>({})
 
-    const { setUsername, username, fetchFollowers } = useContext(UserContext)
+    const { setUsername, fetchFollowers, fetchFollowing } = useContext(UserContext)
 
 
     async function searchGitHubUser() {
@@ -26,6 +26,7 @@ export default function Form() {
         // setGithubUser(await data)
 
         fetchFollowers()
+        fetchFollowing()
 
         // 30 itens por pagina
         // const page = 1
