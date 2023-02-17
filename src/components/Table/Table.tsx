@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './table.module.scss'
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { UserContext } from '../../contexts/userContext'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -9,6 +9,12 @@ import { DiGithubAlt } from "react-icons/di"
 
 function Table() {
     const { followers, followings } = useContext(UserContext)
+
+
+    useEffect(() => {
+        
+    }, [followers])
+
     return (
         <main className={styles.container}>
             <div className={styles.c_table}>
@@ -40,7 +46,7 @@ function Table() {
                                                         sizes='40'
                                                         fill={true}
                                                         alt='img_user'
-                                                        src={`${follower.avatar_url}` || '/default_user.png'} />
+                                                        src={`${follower.avatar_url}`} />
                                                 </td>
                                             </tr>
                                         )
