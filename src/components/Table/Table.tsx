@@ -8,9 +8,7 @@ import Image from 'next/image'
 import { DiGithubAlt } from "react-icons/di"
 
 function Table() {
-
     const { followers, followings } = useContext(UserContext)
-
     return (
         <main className={styles.container}>
             <div className={styles.c_table}>

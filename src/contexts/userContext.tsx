@@ -25,22 +25,13 @@ export default function UserContextProvider({ children }) {
         fetchFollowing(data.following || 1)
 
 
-        console.log(allFollowers)
-        console.log(allFollowing)
-
-        setFollowers([...allFollowers])
-        setFollowings([...allFollowing])
-
+        setFollowers(allFollowers)
+        setFollowings(allFollowing)
     }
 
     async function fetchFollowers(numberOfFollowers: number) {
-
         let page = numberOfFollowers / 30 + 1
-
-        console.log(page)
-
         for (let i = 1; i < page; i++) {
-            // runThisFunc(i)
             await runFetchFollowersForEachPage(i)
         }
     }
@@ -50,21 +41,16 @@ export default function UserContextProvider({ children }) {
         let page = numberOfFollowings / 30 + 1
 
         for (let i = 1; i < page; i++) {
-            // runThisFunc(i)
             await runFetchFollowingsForEachPage(i)
         }
     }
-
-    // async function runThisFunc(page: number) {
-    //     console.log('run at page => ', page)
-    // }
 
     async function runFetchFollowersForEachPage(page: number) {
         const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
             cache: 'no-store'
         })
         const data = await response.json()
-        allFollowers.push(...data)
+        allFollowers.push([...data])
     }
 
     async function runFetchFollowingsForEachPage(page: number) {
@@ -72,7 +58,7 @@ export default function UserContextProvider({ children }) {
             cache: 'no-store'
         })
         const data = await response.json()
-        allFollowing.push(...data)
+        allFollowing.push([...data])
     }
 
 
