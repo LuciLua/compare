@@ -23,22 +23,29 @@ export default function UserContextProvider({ children }) {
 
         // fetchFollowers(data.followers || 1)
         // fetchFollowing(data.following || 1)
-        
-        
-        fetchFollowers(8)
-        fetchFollowing(8)
 
-        
+
+        await fetchFollowers(230)
+        await fetchFollowing(230)
+
+
         console.log(allFollowers)
         console.log(allFollowing)
+
+        setFollowers(allFollowers)
+        setFollowings(allFollowing)
+
     }
 
     async function fetchFollowers(numberOfFollowers: number) {
 
         let page = numberOfFollowers / 30 + 1
+
+        console.log(page)
+
         for (let i = 1; i < page; i++) {
             // runThisFunc(i)
-            runFetchFollowersForEachPage(i)
+            await runFetchFollowersForEachPage(i)
         }
     }
 
@@ -48,7 +55,7 @@ export default function UserContextProvider({ children }) {
 
         for (let i = 1; i < page; i++) {
             // runThisFunc(i)
-            runFetchFollowingsForEachPage(i)
+            await runFetchFollowingsForEachPage(i)
         }
     }
 
@@ -57,29 +64,29 @@ export default function UserContextProvider({ children }) {
     // }
 
     async function runFetchFollowersForEachPage(page: number) {
-        // const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
-            // cache: 'no-store'
-        // })
-        // const data = await response.json()
+        const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
+            cache: 'no-store'
+        })
+        const data = await response.json()
         // setFollowers(data)
         // setFollowers([...followers, data])
         // console.log(followers)
 
-        const data = page + username
+        // let data = { name: page + ' - followers' }
 
         allFollowers.push(await data)
     }
 
     async function runFetchFollowingsForEachPage(page: number) {
-        // const response = await fetch(`https://api.github.com/users/${username}/following?page=${page}`, {
-            // cache: 'no-store'
-        // })
-        // const data = await response.json()
+        const response = await fetch(`https://api.github.com/users/${username}/following?page=${page}`, {
+            cache: 'no-store'
+        })
+        const data = await response.json()
         // setFollowings(data)
         // setFollowings([...followings, data])
         // console.log(followings)
 
-        const data = page + 'bb'
+        // let data = { name: page + ' - followings' }
 
         allFollowing.push(await data)
     }
