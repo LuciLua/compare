@@ -19,9 +19,6 @@ export default function UserContextProvider({ children }) {
 
         fetchFollowers(data.followers || 1)
         fetchFollowing(data.following || 1)
-
-        setFollowers([...allFollowers])
-        setFollowings([...allFollowing])
     }
 
     async function fetchFollowers(numberOfFollowers: number) {
