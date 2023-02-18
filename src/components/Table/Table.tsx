@@ -32,7 +32,7 @@ function Table() {
                             </thead>
                             <tbody>
                                 {userData.login ?
-                                    followers.map(follower => {
+                                    followers[0].map(follower => {
                                         return (
                                             <tr key={follower.id}>
                                                 <td>{follower.login}</td>
