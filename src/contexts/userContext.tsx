@@ -42,7 +42,9 @@ export default function UserContextProvider({ children }) {
             cache: 'no-store'
         })
         const data = await response.json()
-        setFollowers([...data])
+        // setFollowers([...data])
+        setFollowers(prev => { return [[...prev], [...data]] })
+
     }
 
     async function runFetchFollowingsForEachPage(page: number) {
@@ -50,7 +52,7 @@ export default function UserContextProvider({ children }) {
             cache: 'no-store'
         })
         const data = await response.json()
-        setFollowings([...data])
+        setFollowings(prev => [[...prev], [...data]])
     }
 
 
