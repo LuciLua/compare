@@ -27,6 +27,9 @@ export default function UserContextProvider({ children }) {
 
         setFollowers(allFollowers)
         setFollowings(allFollowings)
+
+        console.log(allFollowers)
+        console.log(allFollowings)
     }
 
     async function fetchFollowers(numberOfFollowers: number) {
@@ -52,7 +55,7 @@ export default function UserContextProvider({ children }) {
         // setFollowers([...data])
         const newData = Object.assign([], followers, data)
 
-        allFollowers.push(newData)
+        allFollowers.push(...newData)
 
     }
 
@@ -64,7 +67,7 @@ export default function UserContextProvider({ children }) {
         const data = await response.json()
         const newData = Object.assign([], followings, data)
 
-        allFollowings.push(newData)
+        allFollowings.push(...newData)
     }
 
 
