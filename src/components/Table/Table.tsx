@@ -10,7 +10,7 @@ import { DiGithubAlt } from "react-icons/di"
 function Table() {
     const { followers, followings, userData, username } = useContext(UserContext)
 
-    function att(){
+    function att() {
         console.log(userData)
         console.log('followers:', followers)
         console.log('followings: ', followings)
@@ -86,39 +86,40 @@ function Table() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {followings.length > 0 ?
-                                    followings.map(following => {
-                                        return (
-                                            <tr key={following.id}>
-                                                <td>{following.login}</td>
-                                                <td>
-                                                    <Link
-                                                        href={`https://github.com/${following.login}`}>
-                                                        <DiGithubAlt /> GitHub
-                                                    </Link>
-                                                </td>
-                                                <td>
-                                                    <Image
-                                                        sizes='40'
-                                                        fill={true}
-                                                        alt='img_user'
-                                                        src={`${following.avatar_url}` || '/default_user.png'} />
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                    :
-                                    <tr key={'wainting following'}>
-                                        <td>
-                                            ⌛ wainting
-                                        </td>
-                                        <td>
-                                            for input ...
-                                        </td>
-                                        <td>
-                                            <Image fill={true} alt='img_user' src={'/default_user.png'} />
-                                        </td>
-                                    </tr>
+                                {
+                                    followings.length > 0 ?
+                                        followings.map(following => {
+                                            return (
+                                                <tr key={following.id}>
+                                                    <td>{following.login}</td>
+                                                    <td>
+                                                        <Link
+                                                            href={`https://github.com/${following.login}`}>
+                                                            <DiGithubAlt /> GitHub
+                                                        </Link>
+                                                    </td>
+                                                    <td>
+                                                        <Image
+                                                            sizes='40'
+                                                            fill={true}
+                                                            alt='img_user'
+                                                            src={`${following.avatar_url}` || '/default_user.png'} />
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                        :
+                                        <tr key={'wainting following'}>
+                                            <td>
+                                                ⌛ wainting
+                                            </td>
+                                            <td>
+                                                for input ...
+                                            </td>
+                                            <td>
+                                                <Image fill={true} alt='img_user' src={'/default_user.png'} />
+                                            </td>
+                                        </tr>
                                 }
                             </tbody>
                         </table>
