@@ -8,15 +8,16 @@ import Image from 'next/image'
 import { DiGithubAlt } from "react-icons/di"
 
 function Table() {
-    const { followers, followings } = useContext(UserContext)
+    const { followers, followings, userData, username } = useContext(UserContext)
 
-
-    useEffect(() => {
-        
-    }, [followers])
+    function att(){
+        console.log(userData)
+        console.log(followers)
+    }
 
     return (
         <main className={styles.container}>
+            <button onClick={att}>Atualizar</button>
             <div className={styles.c_table}>
                 <div className={styles.table}>
                     <h1>😡 Follow back do not reciprocate</h1>
@@ -30,7 +31,7 @@ function Table() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {followers.length > 0 ?
+                                {userData.login ?
                                     followers.map(follower => {
                                         return (
                                             <tr key={follower.id}>

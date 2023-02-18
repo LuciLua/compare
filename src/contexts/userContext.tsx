@@ -7,8 +7,8 @@ export default function UserContextProvider({ children }) {
     const [username, setUsername] = useState('')
     const [userData, setUserData] = useState({})
 
-    const [followers, setFollowers] = useState([])
-    const [followings, setFollowings] = useState([])
+    const [followers, setFollowers] = useState({})
+    const [followings, setFollowings] = useState({})
 
 
     const allFollowers = []
@@ -23,7 +23,6 @@ export default function UserContextProvider({ children }) {
 
         fetchFollowers(data.followers || 1)
         fetchFollowing(data.following || 1)
-
 
         setFollowers(allFollowers)
         setFollowings(allFollowing)
