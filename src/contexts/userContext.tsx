@@ -7,12 +7,8 @@ export default function UserContextProvider({ children }) {
     const [username, setUsername] = useState('')
     const [userData, setUserData] = useState({})
 
-    const [followers, setFollowers] = useState({})
-    const [followings, setFollowings] = useState({})
-
-
-    const allFollowers = []
-    const allFollowing = []
+    const [followers, setFollowers] = useState([])
+    const [followings, setFollowings] = useState([])
 
     async function fetchUserProfileData() {
         const response = await fetch(`https://api.github.com/users/${username}`, {
@@ -24,8 +20,8 @@ export default function UserContextProvider({ children }) {
         fetchFollowers(data.followers || 1)
         fetchFollowing(data.following || 1)
 
-        setFollowers(allFollowers)
-        setFollowings(allFollowing)
+        setFollowers([...allFollowers])
+        setFollowings([...allFollowing])
     }
 
     async function fetchFollowers(numberOfFollowers: number) {
@@ -49,7 +45,7 @@ export default function UserContextProvider({ children }) {
             cache: 'no-store'
         })
         const data = await response.json()
-        allFollowers.push([...data])
+        setFollowers([...data])
     }
 
     async function runFetchFollowingsForEachPage(page: number) {
@@ -57,7 +53,7 @@ export default function UserContextProvider({ children }) {
             cache: 'no-store'
         })
         const data = await response.json()
-        allFollowing.push([...data])
+        setFollowings([...data])
     }
 
 

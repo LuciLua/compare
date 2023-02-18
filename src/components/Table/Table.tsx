@@ -12,7 +12,8 @@ function Table() {
 
     function att(){
         console.log(userData)
-        console.log(followers)
+        console.log('followers:', followers)
+        console.log('followings: ', followings)
     }
 
     return (
@@ -32,7 +33,7 @@ function Table() {
                             </thead>
                             <tbody>
                                 {userData.login ?
-                                    followers[0].map(follower => {
+                                    followers.map(follower => {
                                         return (
                                             <tr key={follower.id}>
                                                 <td>{follower.login}</td>
