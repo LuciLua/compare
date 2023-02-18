@@ -12,16 +12,21 @@ import { UserContext } from "../../contexts/userContext"
 
 export default function Form() {
 
-    const { setUsername, fetchUserProfileData, userData } = useContext(UserContext)
+    const { setUsername, fetchUserProfileData, userData, username } = useContext(UserContext)
 
     async function searchGitHubUser() {
-        fetchUserProfileData()
+        await fetchUserProfileData()
+        await setUsername('')
     }
 
     return (
         <main className={styles.container}>
             <form action="" onSubmit={e => e.preventDefault()}>
-                <input onChange={e => setUsername(e.target.value)} type="text" placeholder="GitHub User" />
+                <input
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    type="text"
+                    placeholder="GitHub User" />
                 <button onClick={searchGitHubUser}>compare the lists</button>
             </form>
             <div className={styles.user_info}>

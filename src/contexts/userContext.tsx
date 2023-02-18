@@ -20,10 +20,10 @@ export default function UserContextProvider({ children }) {
         const data = await response.json()
         setUserData(data)
 
-        fetchFollowers(data.followers || 1)
-        fetchFollowing(data.following || 1)
-        // fetchFollowers(90)
-        // fetchFollowing(90)
+        await fetchFollowers(data.followers || 1)
+        await fetchFollowing(data.following || 1)
+        // await fetchFollowers(60)
+        // await fetchFollowing(60)
 
         setFollowers(allFollowers)
         setFollowings(allFollowings)
@@ -47,27 +47,22 @@ export default function UserContextProvider({ children }) {
     }
 
     async function runFetchFollowersForEachPage(page: number) {
-        // const response = await fetch(`https://jsonplaceholder.typicode.com/todos`, {
+        // const response = await fetch(`/db${page}.json`, {
             const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
             cache: 'no-store'
         })
         const data = await response.json()
-        // setFollowers([...data])
-        const newData = Object.assign([], followers, data)
-
-        allFollowers.push(...newData)
+        allFollowers.push(...data)
 
     }
 
     async function runFetchFollowingsForEachPage(page: number) {
-        // const response = await fetch(`https://jsonplaceholder.typicode.com/todos`, {
+        // const response = await fetch(`/db${page}.json`, {
             const response = await fetch(`https://api.github.com/users/${username}/following?page=${page}`, {
             cache: 'no-store'
         })
         const data = await response.json()
-        const newData = Object.assign([], followings, data)
-
-        allFollowings.push(...newData)
+        allFollowings.push(...data)
     }
 
 

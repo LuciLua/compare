@@ -1,24 +1,17 @@
 'use client'
 
 import styles from './table.module.scss'
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext, useEffect, useRef } from "react"
 import { UserContext } from '../../contexts/userContext'
 import Link from 'next/link'
 import Image from 'next/image'
 import { DiGithubAlt } from "react-icons/di"
 
 function Table() {
-    const { followers, followings, userData, username } = useContext(UserContext)
-
-    function att() {
-        console.log(userData)
-        console.log('followers:', followers)
-        console.log('followings: ', followings)
-    }
+    const { followers, followings } = useContext(UserContext)
 
     return (
         <main className={styles.container}>
-            <button onClick={att}>Atualizar</button>
             <div className={styles.c_table}>
                 <div className={styles.table}>
                     <h1>😡 Follow back do not reciprocate</h1>
@@ -32,43 +25,35 @@ function Table() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {userData.login ?
-                                    followers.map(follower => {
-                                        return (
-                                            <tr key={follower.id}>
-                                                <td>{follower.login}</td>
-                                                <td>
-                                                    <Link
-                                                        href={`https://github.com/${follower.login}`}>
-                                                        <DiGithubAlt /> GitHub
-                                                    </Link>
-                                                </td>
-                                                <td>
-                                                    <Image
-                                                        sizes='40'
-                                                        fill={true}
-                                                        alt='img_user'
-                                                        src={`${follower.avatar_url}`} />
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                    :
-                                    <tr key={'wainting followers'}>
-                                        <td>
-                                            ⌛ wainting
-                                        </td>
-                                        <td>
-                                            for input ...
-                                        </td>
-                                        <td>
-                                            <Image
-                                                sizes='40'
-                                                fill={true}
-                                                alt='img_user'
-                                                src={'/default_user.png'} />
-                                        </td>
-                                    </tr>
+                                {/* followers list here */}
+                                {
+                                    followers.length > 0 ?
+                                        followers.map(follower => {
+                                            return (
+                                                <tr key={follower.id}>
+                                                    <td>{follower.login}</td>
+                                                    <td>
+                                                        <Link
+                                                            href={`https://github.com/${follower.login}`}>
+                                                            <DiGithubAlt /> GitHub
+                                                        </Link>
+                                                    </td>
+                                                    <td>
+                                                        <Image
+                                                            sizes='40'
+                                                            fill={true}
+                                                            alt='img_user'
+                                                            src={`${follower.avatar_url}`} />
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                        :
+                                        <tr>
+                                            <td>...</td>
+                                            <td>...</td>
+                                            <td>...</td>
+                                        </tr>
                                 }
                             </tbody>
                         </table>
@@ -86,6 +71,7 @@ function Table() {
                                 </tr>
                             </thead>
                             <tbody>
+                                {/* followings list here */}
                                 {
                                     followings.length > 0 ?
                                         followings.map(following => {
@@ -103,22 +89,16 @@ function Table() {
                                                             sizes='40'
                                                             fill={true}
                                                             alt='img_user'
-                                                            src={`${following.avatar_url}` || '/default_user.png'} />
+                                                            src={`${following.avatar_url}`} />
                                                     </td>
                                                 </tr>
                                             )
                                         })
                                         :
-                                        <tr key={'wainting following'}>
-                                            <td>
-                                                ⌛ wainting
-                                            </td>
-                                            <td>
-                                                for input ...
-                                            </td>
-                                            <td>
-                                                <Image fill={true} alt='img_user' src={'/default_user.png'} />
-                                            </td>
+                                        <tr>
+                                            <td>...</td>
+                                            <td>...</td>
+                                            <td>...</td>
                                         </tr>
                                 }
                             </tbody>
