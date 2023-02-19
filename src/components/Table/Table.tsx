@@ -1,14 +1,14 @@
 'use client'
 
 import styles from './table.module.scss'
-import { useState, useContext, useEffect, useRef } from "react"
+import { useContext } from "react"
 import { UserContext } from '../../contexts/userContext'
 import Link from 'next/link'
 import Image from 'next/image'
 import { DiGithubAlt } from "react-icons/di"
 
 function Table() {
-    const { followers, followings } = useContext(UserContext)
+    const { notReciprocate, iNotReciprocate } = useContext(UserContext)
 
     return (
         <main className={styles.container}>
@@ -25,10 +25,9 @@ function Table() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* followers list here */}
                                 {
-                                    followers.length > 0 ?
-                                        followers.map(follower => {
+                                    notReciprocate.length > 0 ?
+                                        notReciprocate.map(follower => {
                                             return (
                                                 <tr key={follower.id}>
                                                     <td>{follower.login}</td>
@@ -71,10 +70,9 @@ function Table() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* followings list here */}
                                 {
-                                    followings.length > 0 ?
-                                        followings.map(following => {
+                                    iNotReciprocate.length > 0 ?
+                                        iNotReciprocate.map(following => {
                                             return (
                                                 <tr key={following.id}>
                                                     <td>{following.login}</td>

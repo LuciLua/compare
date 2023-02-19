@@ -5,8 +5,7 @@
 'use client'
 
 import styles from "./form.module.scss"
-import { Suspense, useState } from "react"
-import useUser from "../../hooks/useUser"
+import { Suspense } from "react"
 import { useContext } from "react"
 import { UserContext } from "../../contexts/userContext"
 
@@ -40,12 +39,13 @@ export default function Form() {
                                 <h1>{userData.name}</h1>
                             </header>
 
-                            {userData.bio ?
-                                <li>
-                                    Bio: {userData.bio}
-                                </li>
-                                :
-                                null}
+                            {
+                                userData.bio ?
+                                    <li>
+                                        Bio: {userData.bio}
+                                    </li>
+                                    :
+                                    null}
                             {
                                 userData.twitter_username ?
                                     <li>
