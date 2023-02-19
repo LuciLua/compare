@@ -1,14 +1,14 @@
 'use client'
 
 import styles from './table.module.scss'
-import { useState, useContext, useEffect, useRef } from "react"
+import { useContext } from "react"
 import { UserContext } from '../../contexts/userContext'
 import Link from 'next/link'
 import Image from 'next/image'
 import { DiGithubAlt } from "react-icons/di"
 
 function Table() {
-    const { followers, followings, notReciprocate, iNotReciprocate } = useContext(UserContext)
+    const { notReciprocate, iNotReciprocate } = useContext(UserContext)
 
     return (
         <main className={styles.container}>

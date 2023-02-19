@@ -18,9 +18,8 @@ export default function UserContextProvider({ children }) {
 
     async function fetchUserProfileData() {
 
-        // setFollowers([])
-        // setFollowings([])
-
+        setFollowers([])
+        setFollowings([])
         setINotReciprocate([])
         setNotReciprocate([])
 
@@ -38,16 +37,16 @@ export default function UserContextProvider({ children }) {
         setFollowers(allFollowers)
         setFollowings(allFollowings)
 
+        function compareLists(list1: Array<any>, list2: Array<any>) {
+            return list1.filter(item1 => {
+                return !list2.some(item2 => {
+                    return item1.id === item2.id
+                })
+            })
+        }
 
-        const uniqueItemsInot = await followers.filter(async follower => {
-            return  !followings.some(async following => await follower.id === await following.id)
-        });
-        const uniqueItemsNot = await followings.filter(async follower => {
-            return  !followers.some(async following => await follower.id === await following.id)
-        });
-
-        setINotReciprocate(uniqueItemsInot)
-        setNotReciprocate(uniqueItemsNot)
+        setNotReciprocate(compareLists(allFollowers, allFollowings))
+        setINotReciprocate(compareLists(allFollowings, allFollowers))
     }
 
     async function fetchFollowers(numberOfFollowers: number) {
@@ -66,7 +65,7 @@ export default function UserContextProvider({ children }) {
 
     async function runFetchFollowersForEachPage(page: number) {
         // const response = await fetch(`/db11.json`, {
-            const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
+        const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
             cache: 'no-store'
         })
         const data = await response.json()
@@ -75,7 +74,7 @@ export default function UserContextProvider({ children }) {
 
     async function runFetchFollowingsForEachPage(page: number) {
         // const response = await fetch(`/db21.json`, {
-            const response = await fetch(`https://api.github.com/users/${username}/following?page=${page}`, {
+        const response = await fetch(`https://api.github.com/users/${username}/following?page=${page}`, {
             cache: 'no-store'
         })
         const data = await response.json()
