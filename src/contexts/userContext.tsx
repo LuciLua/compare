@@ -84,7 +84,7 @@ export default function UserContextProvider({ children }) {
     async function compareLists(followers: any, followings: any) {
 
         const uniqueItems = await followers.filter(follower => {
-            !followings.some(following => follower.id === following.id)
+            return !followings.some(following => follower.id === following.id)
         });
 
         return (await uniqueItems)
