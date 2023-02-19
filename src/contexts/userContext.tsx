@@ -38,15 +38,16 @@ export default function UserContextProvider({ children }) {
         setFollowers(allFollowers)
         setFollowings(allFollowings)
 
-        // await getNotReciprocate()
-        // await getINotReciprocate()
 
-        setINotReciprocate(await compareLists(followers, followings))
-        setNotReciprocate(await compareLists(followings, followers))
+        const uniqueItemsInot = await followers.filter(async follower => {
+            return  !followings.some(async following => await follower.id === await following.id)
+        });
+        const uniqueItemsNot = await followings.filter(async follower => {
+            return  !followers.some(async following => await follower.id === await following.id)
+        });
 
-        console.log('iNotReciprocate: ', iNotReciprocate)
-        console.log('notReciprocate: ', notReciprocate)
-
+        setINotReciprocate(uniqueItemsInot)
+        setNotReciprocate(uniqueItemsNot)
     }
 
     async function fetchFollowers(numberOfFollowers: number) {
@@ -65,7 +66,7 @@ export default function UserContextProvider({ children }) {
 
     async function runFetchFollowersForEachPage(page: number) {
         // const response = await fetch(`/db11.json`, {
-        const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
+            const response = await fetch(`https://api.github.com/users/${username}/followers?page=${page}`, {
             cache: 'no-store'
         })
         const data = await response.json()
@@ -74,20 +75,11 @@ export default function UserContextProvider({ children }) {
 
     async function runFetchFollowingsForEachPage(page: number) {
         // const response = await fetch(`/db21.json`, {
-        const response = await fetch(`https://api.github.com/users/${username}/following?page=${page}`, {
+            const response = await fetch(`https://api.github.com/users/${username}/following?page=${page}`, {
             cache: 'no-store'
         })
         const data = await response.json()
         allFollowings.push(...data)
-    }
-
-    async function compareLists(followers: any, followings: any) {
-
-        const uniqueItems = await followers.filter(follower => {
-            return !followings.some(following => follower.id === following.id)
-        });
-
-        return (await uniqueItems)
     }
 
     return (
