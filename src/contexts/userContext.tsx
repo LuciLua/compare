@@ -45,8 +45,8 @@ export default function UserContextProvider({ children }) {
             })
         }
 
-        setNotReciprocate(compareLists(allFollowers, allFollowings))
-        setINotReciprocate(compareLists(allFollowings, allFollowers))
+        setNotReciprocate(compareLists(allFollowings, allFollowers))
+        setINotReciprocate(compareLists(allFollowers, allFollowings))
     }
 
     async function fetchFollowers(numberOfFollowers: number) {
