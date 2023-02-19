@@ -25,7 +25,6 @@ function Table() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* followers list here */}
                                 {
                                     followers.length > 0 ?
                                         followers.map(follower => {
@@ -71,7 +70,6 @@ function Table() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* followings list here */}
                                 {
                                     followings.length > 0 ?
                                         followings.map(following => {
