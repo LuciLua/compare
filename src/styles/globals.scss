@@ -1,4 +1,6 @@
-*::before, *, *::after{
+*::before,
+*,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,6 +10,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400&display=swap');
 
-:root{
+:root {
     --global-bg: #14141e;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: radial-gradient(#131239, #1e1e1f);
 }

@@ -1,115 +1,73 @@
-import useUser from "../../hooks/useUser"
-import Table from "../Table/Table"
+// os components que possuirem use client serão hidratados, ou seja:
+// irao receber javascript do servidor (next), ou seja:
+// adicionar funcionamento interactivo a esse componente
+// todo o resto, nao0 precisa de javascrip para funcionar
+'use client'
+
 import styles from "./form.module.scss"
-import { AiFillCamera, AiOutlineSearch } from "react-icons/ai"
-import { useState } from "react"
-import Image from "next/image"
+import { Suspense } from "react"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/userContext"
 
-interface PropsForm {
-    linkFinal?: any,
-    getImpostor?: any,
-    getIamImpostor?: any,
-    impostor?: any,
-    iamImpostor?: any,
-    followers?: any,
-    following?: any,
-    getMyPhoto?: any,
-    userId?: any
-}
+export default function Form() {
 
+    const { setUsername, fetchUserProfileData, userData, username } = useContext(UserContext)
 
-function Form(props:PropsForm) {
-
-    const [photo, setPhoto] = useState(`/gh.png`)
-
-    const {
-        user,
-        novoUsuario,
-        // setPage,
-        setType,
-        type,
-        // page,
-        linkFinal,
-        impostor,
-        followers,
-        following,
-        paginator,
-        getImpostor,
-        getIamImpostor,
-        iamImpostor,
-        getMyPhoto,
-        userId,
-    } = useUser()
-
-    async function showPhoto() {
-        const userID = await userId()
-        setPhoto(`https://avatars.githubusercontent.com/u/${userID}`)
+    async function searchGitHubUser() {
+        await fetchUserProfileData()
+        await setUsername('')
     }
-
-    async function execPaginatorAndPhoto() {
-        await paginator()
-        await showPhoto()
-    }
-
-
 
     return (
-        <div className={styles.container}>
-            <div className={styles.profilePhoto}>
-                <Image
-                    src={photo}
-                    layout='fill'
-                />
-            </div>
-            <div className={styles.boxInput}>
-                <div className={styles.inputAndButton}>
-                    <input
-                        type="text"
-                        placeholder="Your Username"
-                        onChange={novoUsuario}
-                    />
-                    <button onClick={execPaginatorAndPhoto}>
-                        <AiOutlineSearch />
-                    </button>
-                </div>
+        <main className={styles.container}>
+            <form action="" onSubmit={e => e.preventDefault()}>
+                <input
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    type="text"
+                    placeholder="GitHub User" />
+                <button onClick={searchGitHubUser}>compare the lists</button>
+            </form>
+            <div className={styles.user_info}>
+                <Suspense fallback={<p>⌛ loading github infos...</p>}>
+                    {userData.name ?
+                        <ul>
+                            <header>
+                                <div className={styles.c_img}>
+                                    <img src={userData.avatar_url} />
+                                </div>
+                                <h1>{userData.name}</h1>
+                            </header>
 
-                <p>{user ? `Searching for ${user}` : ""}</p>
+                            {
+                                userData.bio ?
+                                    <li>
+                                        Bio: {userData.bio}
+                                    </li>
+                                    :
+                                    null}
+                            {
+                                userData.twitter_username ?
+                                    <li>
+                                        Twitter: {userData.twitter_username}
+                                    </li>
+                                    : null
+                            }
+                            <li>
+                                Followers: {userData.followers}
+                            </li>
+                            <li>
+                                Following: {userData.following}
+                            </li>
+                        </ul>
+                        : <p style={{
+                            color: '#fff'
+                        }}>
+                            ⌛waiting for input...
+                        </p>
+                    }
+                </Suspense>
             </div>
-            <div className={styles.types}>
-                <label htmlFor="followers">followers
-                    <input
-                        type="radio"
-                        name="type"
-                        id="followers"
-                        value={"followers"}
-                        onClick={() => setType("followers")}
-                    />
-                </label>
-                <label htmlFor="following">following
-                    <input
-                        type="radio"
-                        name="type"
-                        id="following"
-                        value={"following"}
-                        onClick={() => setType("following")}
-                    />
-                </label>
-                <label className={styles.typeActive} htmlFor="type">
-                    {type}
-                </label>
-            </div>
-            <Table
-                linkFinal={linkFinal}
-                followers={followers}
-                following={following}
-                impostor={impostor}
-                getImpostor={getImpostor}
-                getIamImpostor={getIamImpostor}
-                iamImpostor={iamImpostor}
-                getMyPhoto={getMyPhoto}
-                userId={userId} />
-        </div>
+        </main>
     )
 }
-
-export default Form
