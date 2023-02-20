@@ -8,8 +8,6 @@ main.container {
 
   position: relative;
 
-  // background-color: blue;
-
   .c_tables {
 
     width: 100%;
@@ -22,93 +20,8 @@ main.container {
 
     gap: 10px;
 
-    // background-color: red;
     padding: 10px;
 
-    .c_table {
-      width: 100%;
-      height: fit-content;
-      max-height: 800px;
-
-      display: flex;
-      flex-direction: column;
-
-      position: relative;
-
-      background-color: rgba(207, 209, 219, 0.1);
-
-      border-radius: 10px;
-      overflow: hidden;
-
-      h1 {
-        font-size: 18px;
-        text-align: center;
-        color: #fff;
-        padding: 20px 30px;
-        font-weight: 200;
-
-        border-bottom: 1px solid rgba(255, 255, 255, 0.483);
-      }
-
-      .table {
-        position: relative;
-
-        width: 100%;
-        height: 100%;
-        max-height: 100%;
-
-        background-color: rgb(91, 91, 115);
-
-        overflow: hidden;
-        overflow-y: scroll;
-
-        &::-webkit-scrollbar {
-          border-radius: 3px;
-
-          width: 5px;
-          background-color: rgb(237, 237, 237);
-        }
-
-        &::-webkit-scrollbar-thumb {
-          border-radius: 3px;
-          background-color: #b9b9b9;
-        }
-
-        .item {
-          width: 100%;
-          height: 70px;
-          background-color: #fff;
-          position: relative;
-
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-
-          border-bottom: 1px solid rgb(225, 225, 225);
-
-          .c_who {
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: center;
-
-            span{
-              margin-left: 10px;
-            }
-
-            .c_img {
-              position: relative;
-              object-fit: cover;
-              width: 40px;
-              height: 40px;
-              border-radius: 60%;
-              overflow: hidden;
-            }
-          }
-
-        }
-
-      }
-    }
   }
 }
 

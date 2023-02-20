@@ -1,4 +1,4 @@
-import styles from "../form.module.scss"
+import styles from "./githubinfos.module.scss"
 import { FiTwitter, FiGithub } from "react-icons/fi"
 import { CgWebsite } from "react-icons/cg"
 import Link from "next/link"
@@ -6,7 +6,6 @@ import Link from "next/link"
 function GitHubInfos({ userData }) {
     return (
         <div className={styles.user_info}>
-            <ul>
                 <aside>
                     {
                         userData.html_url ?
@@ -64,7 +63,6 @@ function GitHubInfos({ userData }) {
                         </li>
                     </div>
                 </aside>
-            </ul>
         </div>
     )
 }
