@@ -1,4 +1,4 @@
-import styles from "../Form.module.scss"
+import styles from "../form.module.scss"
 import { FiTwitter, FiGithub } from "react-icons/fi"
 import { CgWebsite } from "react-icons/cg"
 import Link from "next/link"
