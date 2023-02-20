@@ -20,5 +20,17 @@ body {
     justify-content: center;
     align-items: center;
 
-    background: radial-gradient(#131239, #1e1e1f);
+    background: radial-gradient(#453ffa, #4bb5e3);
+
+    &::-webkit-scrollbar {
+        border-radius: 3px;
+
+        width: 5px;
+        background-color: rgb(237, 237, 237);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 3px;
+        background-color: #b9b9b9;
+    }
 }
