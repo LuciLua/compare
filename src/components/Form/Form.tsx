@@ -4,7 +4,7 @@
 // todo o resto, nao0 precisa de javascrip para funcionar
 'use client'
 
-import styles from "./Form.module.scss"
+import styles from "./form.module.scss"
 import { useContext } from "react"
 import { UserContext } from "../../contexts/userContext"
 import GitHubInfos from "./GitHubInfos/GitHubInfos"
