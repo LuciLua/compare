@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { DiGithubAlt } from "react-icons/di"
 
-import styles from "../table.module.scss"
+import styles from "./tableByType.module.scss"
 
 function TableByType({title, type}) {
 
@@ -34,13 +34,12 @@ function TableByType({title, type}) {
                                         src={`${followingOrFollower.avatar_url}`} />
                                 </div>
                             </div>
-                            <div><p>{followingOrFollower.type}</p></div>
-                            <div>
+                            <div className={styles.c_type}><p>{followingOrFollower.type}</p></div>
+                            <div className={styles.c_github}>
                                 <p>
-
                                     <Link
                                         href={`https://github.com/${followingOrFollower.login}`}>
-                                        <DiGithubAlt /> GitHub
+                                        <DiGithubAlt /> Github
                                     </Link>
                                 </p>
                             </div>
